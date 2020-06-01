@@ -1,0 +1,55 @@
+body {
+  background: white;
+}
+
+#controls-wrapper {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  text-align: center;
+}
+.btn-arrow {
+  width: 30px;
+  height: 30px;
+}
+#btn-left {
+  margin-right: 32px;
+}
+.circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  background: blue;
+}
+/* --------------task-1+++ */
+.circle:hover {
+  background: transparent;
+  border-color: blue;
+  border-style: solid;
+}
+
+#piece {
+  position: absolute;
+  top: 100px;
+  left: 50%;
+
+  /* --------------task-7+++ */
+  transition: all 1s linear;
+}
+
+#btn-reset {
+  position: absolute;
+  top: 120px;
+  right: 30px;
+}
+
+#btn-random {
+  position: absolute;
+  top: 150px;
+  right: 30px;
+}
+#btn-temperature {
+  position: absolute;
+  top: 180px;
+  right: 30px;
+}
