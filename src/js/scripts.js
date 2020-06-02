@@ -35,25 +35,25 @@ function handleClick(ev) {
 
 const btnsSettings = [
   {
-    btnId: 'btn-up',
+    btnId: "btn-up",
     dx: 0,
-    dy: -100
+    dy: -100,
   },
   {
-    btnId: 'btn-right',
+    btnId: "btn-right",
     dx: 100,
-    dy: 0
+    dy: 0,
   },
   {
-    btnId: 'btn-down',
+    btnId: "btn-down",
     dx: 0,
-    dy: 100
+    dy: 100,
   },
   {
-    btnId: 'btn-left',
+    btnId: "btn-left",
     dx: -100,
-    dy: 0
-  }
+    dy: 0,
+  },
 ];
 
 function initButton(btnId, dx, dy) {
@@ -65,15 +65,10 @@ function initButton(btnId, dx, dy) {
 
 function init() {
   // --------------task-2+++
-  
-  btnsSettings.forEach(({btnId, dx, dy}) => {
-    initButton(btnId, dx, dy)
-  });
 
-  // initButton("btn-up", 0, -100);
-  // initButton("btn-right", 100, 0);
-  // initButton("btn-down", 0, 100);
-  // initButton("btn-left", -100, 0);
+  btnsSettings.forEach(({ btnId, dx, dy }) => {
+    initButton(btnId, dx, dy);
+  });
 }
 
 window.addEventListener("DOMContentLoaded", (event) => {
@@ -83,7 +78,8 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
 // --------------task-4+++
 document.getElementById("btn-reset").onclick = function () {
-  location.reload();
+  piece.el.style.left = wWidth / 2 + "px";
+  piece.el.style.top = "100px";
 };
 
 // --------------task-5+++
@@ -125,8 +121,7 @@ function setPieceColorByTemperature(temp) {
   } else if (temp >= 30) {
     color = "red";
   }
-  
+
   const circle = document.getElementsByClassName("circle")[0];
   circle.style.backgroundColor = color;
-    
 }
