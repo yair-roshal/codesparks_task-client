@@ -33,19 +33,47 @@ function handleClick(ev) {
   piece.moveDelta(parseInt(this.dataset.dx), parseInt(this.dataset.dy));
 }
 
+const btnsSettings = [
+  {
+    btnId: 'btn-up',
+    dx: 0,
+    dy: -100
+  },
+  {
+    btnId: 'btn-right',
+    dx: 100,
+    dy: 0
+  },
+  {
+    btnId: 'btn-down',
+    dx: 0,
+    dy: 100
+  },
+  {
+    btnId: 'btn-left',
+    dx: -100,
+    dy: 0
+  }
+];
+
+function initButton(btnId, dx, dy) {
+  const btn = document.getElementById(btnId);
+  btn.dataset.dx = dx;
+  btn.dataset.dy = dy;
+  btn.addEventListener("click", handleClick);
+}
+
 function init() {
   // --------------task-2+++
-  function initButton(navName, idName, dx, dy) {
-    navName = document.getElementById(idName);
-    navName.dataset.dx = dx;
-    navName.dataset.dy = dy;
-    navName.addEventListener("click", handleClick);
-  }
+  
+  btnsSettings.forEach(({btnId, dx, dy}) => {
+    initButton(btnId, dx, dy)
+  });
 
-  initButton("btnUp", "btn-up", 0, -100);
-  initButton("btnRight", "btn-right", 100, 0);
-  initButton("btnDown", "btn-down", 0, 100);
-  initButton("btnLeft", "btn-left", -100, 0);
+  // initButton("btn-up", 0, -100);
+  // initButton("btn-right", 100, 0);
+  // initButton("btn-down", 0, 100);
+  // initButton("btn-left", -100, 0);
 }
 
 window.addEventListener("DOMContentLoaded", (event) => {
@@ -61,7 +89,7 @@ document.getElementById("btn-reset").onclick = function () {
 // --------------task-5+++
 function randomInteger(min, max) {
   // get a random number from (min-0.5) up to (max+0.5)
-  let rand = min - 0.5 + Math.random() * (max - min + 1);
+  const rand = min - 0.5 + Math.random() * (max - min + 1);
   return Math.round(rand);
 }
 
@@ -71,8 +99,7 @@ function random() {
 }
 
 // --------------task-6+++
-var circle = document.getElementsByClassName("circle")[0];
-function temperature() {
+function fetchTemperature() {
   fetch(
     `https://weatherstack.glitch.me/current?access_key=5f58d7a0eecd822f4bd469586df5585c&query=tel%20aviv`
   )
@@ -80,19 +107,26 @@ function temperature() {
       return response.json();
     })
     .then((data) => {
-      let temp = data.current.temperature;
-
-      if (temp < 10) {
-        circle.style.backgroundColor = "blue";
-      }
-      if (temp >= 11 && temp <= 20) {
-        circle.style.backgroundColor = "green";
-      }
-      if (temp >= 21 && temp <= 30) {
-        circle.style.backgroundColor = "yellow";
-      }
-      if (temp >= 30) {
-        circle.style.backgroundColor = "red";
-      }
+      const temp = data.current.temperature;
+      setPieceColorByTemperature(temp);
     });
+}
+
+function setPieceColorByTemperature(temp) {
+  // const temp = fetchTemperature();
+  let color;
+
+  if (temp < 10) {
+    color = "blue";
+  } else if (temp >= 11 && temp <= 20) {
+    color = "green";
+  } else if (temp >= 21 && temp <= 30) {
+    color = "yellow";
+  } else if (temp >= 30) {
+    color = "red";
+  }
+  
+  const circle = document.getElementsByClassName("circle")[0];
+  circle.style.backgroundColor = color;
+    
 }
